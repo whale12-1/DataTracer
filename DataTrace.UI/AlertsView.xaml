@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="DataTrace.UI.Views.AlertsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid Margin="20">
+        <DataGrid ItemsSource="{Binding AlertsView}" AutoGenerateColumns="False" IsReadOnly="True" 
+                  Background="White" RowBackground="White" AlternatingRowBackground="#F9F9F9"
+                  GridLinesVisibility="Horizontal" HorizontalGridLinesBrush="#EEE"
+                  EnableRowVirtualization="True" VirtualizingPanel.IsVirtualizing="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Уровень" Binding="{Binding Severity}" Width="100">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Severity}" Value="Critical">
+                                    <Setter Property="Foreground" Value="{StaticResource DangerColor}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Правило" Binding="{Binding RuleId}" Width="100"/>
+                <DataGridTextColumn Header="Описание" Binding="{Binding Description}" Width="250"/>
+                <DataGridTextColumn Header="Процесс" Binding="{Binding ProcessName}" Width="150"/>
+                <DataGridTextColumn Header="Домен / Куда" Binding="{Binding RemoteDomain}" Width="*"/>
+                <DataGridTextColumn Header="Доказательство" Binding="{Binding Evidence}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>

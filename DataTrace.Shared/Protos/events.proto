@@ -1,0 +1,36 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "DataTrace.Shared";
+
+package datatrace;
+
+message ProcessEvent {
+  uint32 pid = 1;
+  uint32 parent_pid = 2;
+  string image_name = 3;
+  int64 timestamp_utc = 4;
+}
+
+message NetworkEvent {
+  uint32 pid = 1;
+  string local_ip = 2;
+  uint32 local_port = 3;
+  string remote_ip = 4;
+  uint32 remote_port = 5;
+  uint32 protocol = 6; // 6 = TCP, 17 = UDP
+  int64 timestamp_utc = 7;
+}
+
+message ClipboardEvent {
+  string text = 1;
+  int64 timestamp_utc = 2;
+}
+
+
+message EventWrapper {
+  oneof payload {
+    ProcessEvent process_event = 1;
+    NetworkEvent network_event = 2;
+    ClipboardEvent clipboard_event = 3; // <-- ДОБАВИТЬ ЭТО
+  }
+}

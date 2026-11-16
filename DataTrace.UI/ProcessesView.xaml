@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="DataTrace.UI.Views.ProcessesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <TreeView ItemsSource="{Binding ProcessTree}" Margin="20" Background="Transparent" BorderThickness="0">
+        <TreeView.ItemTemplate>
+            <HierarchicalDataTemplate ItemsSource="{Binding Children}">
+                <StackPanel Orientation="Horizontal" Margin="0,2">
+                    <TextBlock Text="⚙️ " />
+                    <TextBlock Text="{Binding Process.ImageName}" FontWeight="SemiBold" Foreground="#333"/>
+                    <TextBlock Text=" (PID: " Foreground="Gray"/>
+                    <TextBlock Text="{Binding Process.Pid}" Foreground="{StaticResource AccentColor}"/>
+                    <TextBlock Text=")" Foreground="Gray"/>
+                </StackPanel>
+            </HierarchicalDataTemplate>
+        </TreeView.ItemTemplate>
+    </TreeView>
+</UserControl>
