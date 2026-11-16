@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\EventQueue">
+      <UniqueIdentifier>{06ab66cb-5562-48fc-afa9-cee71ff6c347}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\PipeWriter">
+      <UniqueIdentifier>{11642850-6fdc-4228-b509-8b29a8571233}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\ClipboardListener">
+      <UniqueIdentifier>{98086afe-487d-46cb-9174-8b9f2cb55c51}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="DataTrace.Native\events.pb.cc">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="EventQueue.cpp">
+      <Filter>Исходные файлы\EventQueue</Filter>
+    </ClCompile>
+    <ClCompile Include="PipeWriter.cpp">
+      <Filter>Исходные файлы\PipeWriter</Filter>
+    </ClCompile>
+    <ClCompile Include="ClipboardListener.cpp">
+      <Filter>Исходные файлы\ClipboardListener</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DataTrace.Native\events.pb.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="EventQueue.h">
+      <Filter>Исходные файлы\EventQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="PipeWriter.h">
+      <Filter>Исходные файлы\PipeWriter</Filter>
+    </ClInclude>
+    <ClInclude Include="ClipboardListener.h">
+      <Filter>Исходные файлы\ClipboardListener</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
