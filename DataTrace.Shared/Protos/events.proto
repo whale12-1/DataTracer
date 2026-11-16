@@ -27,10 +27,31 @@ message ClipboardEvent {
 }
 
 
+message Win32kEvent {
+  uint32 pid = 1;
+  uint32 event_id = 2;
+  string api_name = 3; 
+  string details = 4;
+  int64 timestamp_utc = 5;
+}
+
+message CameraEvent {
+  uint32 pid = 1;
+  int64 timestamp_utc = 2;
+}
+
+message AudioEvent {
+  uint32 pid = 1;
+  int64 timestamp_utc = 2;
+}
+
 message EventWrapper {
   oneof payload {
     ProcessEvent process_event = 1;
     NetworkEvent network_event = 2;
-    ClipboardEvent clipboard_event = 3; // <-- ДОБАВИТЬ ЭТО
+    ClipboardEvent clipboard_event = 3;
+    Win32kEvent win32k_event = 4;
+    CameraEvent camera_event = 5; // <--- НОВОЕ
+    AudioEvent audio_event = 6;   // <--- НОВОЕ
   }
 }

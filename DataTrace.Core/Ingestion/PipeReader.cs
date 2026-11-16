@@ -1,5 +1,5 @@
 ﻿using DataTrace.Core.Processing;
-using DataTrace.Core.Rules; // Добавили Rules
+using DataTrace.Core.Security;
 using DataTrace.Core.Storage;
 using DataTrace.Shared;
 using System;
@@ -17,13 +17,17 @@ namespace DataTrace.Core.Ingestion
         private readonly Channel<ProcessEvent> _channel;
         private readonly DatabaseManager _db;
         private readonly ConnectionTracker _tracker;
-        private readonly RuleEngine _ruleEngine; // ДОБАВИЛИ ДВИЖОК ПРАВИЛ
+
+        // Теперь у нас есть только модульный менеджер безопасности
+        private readonly SecurityManager _securityManager;
 
         public PipeReader(DatabaseManager db, ConnectionTracker tracker)
         {
             _db = db;
             _tracker = tracker;
-            _ruleEngine = new RuleEngine(); // ИНИЦИАЛИЗИРОВАЛИ
+
+            // Инициализируем менеджер (он внутри себя создаст DlpDetector, KeyloggerDetector и т.д.)
+            _securityManager = new SecurityManager();
 
             _channel = Channel.CreateBounded<ProcessEvent>(new BoundedChannelOptions(5000)
             {
@@ -65,20 +69,33 @@ namespace DataTrace.Core.Ingestion
                             totalRead += read;
                         }
 
+                        // Распаковываем конверт
                         var wrapper = EventWrapper.Parser.ParseFrom(messageBuffer);
 
-                        // ==========================================
-                        // ОБРАБОТКА СОБЫТИЙ ПРОЦЕССОВ
-                        // ==========================================
+                        // =========================================================
+                        // 1. МОДУЛЬНЫЙ АНАЛИЗ БЕЗОПАСНОСТИ (для всех типов событий)
+                        // =========================================================
+                        var alerts = _securityManager.ProcessEvent(wrapper);
+                        foreach (var alert in alerts)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine($"🚨 [ALERT: {alert.Severity}] {alert.Description}");
+                            Console.WriteLine($"   Процесс: {alert.ProcessName} | Доказательство: {alert.Evidence}");
+                            Console.ResetColor();
+
+                            // Сохраняем в БД
+                            try { _db.InsertAlert(alert); } catch { /* ignore db error */ }
+                        }
+
+                        // =========================================================
+                        // 2. ОБРАБОТКА СОБЫТИЙ ДЛЯ ТРЕКИНГА (Процессы и Сеть)
+                        // =========================================================
                         if (wrapper.PayloadCase == EventWrapper.PayloadOneofCase.ProcessEvent)
                         {
                             var proc = wrapper.ProcessEvent;
                             _tracker.AddProcess(proc.Pid, proc.ImageName);
                             await _channel.Writer.WriteAsync(proc, cancellationToken);
                         }
-                        // ==========================================
-                        // ОБРАБОТКА СЕТЕВЫХ СОБЫТИЙ
-                        // ==========================================
                         else if (wrapper.PayloadCase == EventWrapper.PayloadOneofCase.NetworkEvent)
                         {
                             var net = wrapper.NetworkEvent;
@@ -88,34 +105,8 @@ namespace DataTrace.Core.Ingestion
                             Console.WriteLine($"[СЕТЬ] {processName} (PID: {net.Pid}) -> {net.RemoteIp}:{net.RemotePort} [{domain}]");
                             _db.InsertConnection(net.Pid, processName, net.RemoteIp, net.RemotePort, domain, net.TimestampUtc);
                         }
-                        // ==========================================
-                        // ОБРАБОТКА БУФЕРА ОБМЕНА (ВОТ ЧЕГО НЕ ХВАТАЛО!)
-                        // ==========================================
-                        else if (wrapper.PayloadCase == EventWrapper.PayloadOneofCase.ClipboardEvent)
-                        {
-                            var clip = wrapper.ClipboardEvent;
-                            Console.WriteLine($"\n[CLIPBOARD] Перехвачен текст ({clip.Text.Length} символов)");
-
-                            // Прогоняем текст через наш RuleEngine
-                            var alerts = _ruleEngine.AnalyzePayload(clip.Text, "Clipboard", "LocalHost", 0);
-
-                            if (alerts.Count == 0)
-                            {
-                                Console.WriteLine("   Текст чист, угроз не обнаружено.");
-                            }
-
-                            foreach (var alert in alerts)
-                            {
-                                // Выводим в консоль красным
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                Console.WriteLine($"🚨 [ALERT: {alert.Severity}] {alert.Description}");
-                                Console.WriteLine($"   Доказательство: {alert.Evidence}");
-                                Console.ResetColor();
-
-                                // Сохраняем в БД (метод InsertAlert мы добавили ранее)
-                                try { _db.InsertAlert(alert); } catch { /* ignore db error */ }
-                            }
-                        }
+                        // Примечание: ClipboardEvent и Win32kEvent больше не нужно обрабатывать здесь.
+                        // SecurityManager и его детекторы (DlpDetector, KeyloggerDetector) сделали это выше.
                     }
                 }
                 catch (Exception ex)
@@ -142,7 +133,6 @@ namespace DataTrace.Core.Ingestion
                 {
                     var evt = await _channel.Reader.ReadAsync(timeoutCts.Token);
                     buffer.Add(evt);
-                    // Console.WriteLine($"[C#] Получено: {evt.ImageName} (PID: {evt.Pid})"); // Закомментировали, чтобы не спамило
                 }
                 catch (OperationCanceledException) { }
                 catch (Exception ex)
@@ -153,7 +143,6 @@ namespace DataTrace.Core.Ingestion
                 if (buffer.Count >= 50 || buffer.Count > 0)
                 {
                     _db.InsertBatch(buffer);
-                    // Console.WriteLine($"[DB] Сохранено {buffer.Count} записей в SQLite.");
                     buffer.Clear();
                 }
             }

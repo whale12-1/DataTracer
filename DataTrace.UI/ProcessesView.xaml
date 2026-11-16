@@ -1,16 +1,55 @@
 ﻿<UserControl x:Class="DataTrace.UI.Views.ProcessesView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <TreeView ItemsSource="{Binding ProcessTree}" Margin="20" Background="Transparent" BorderThickness="0">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:DataTrace.UI.Converters">
+
+    <UserControl.Resources>
+        <!-- Подключаем конвертеры -->
+        <conv:PathCleanerConverter x:Key="PathCleaner"/>
+        <conv:CountToVisibilityConverter x:Key="CountToVisibility"/>
+
+        <!-- Стиль для элементов дерева -->
+        <Style TargetType="TreeViewItem">
+            <Setter Property="IsExpanded" Value="True"/>
+            <Setter Property="Padding" Value="2,4"/>
+        </Style>
+    </UserControl.Resources>
+
+    <TreeView ItemsSource="{Binding ProcessTree}" 
+              Margin="20" 
+              Background="Transparent" 
+              BorderThickness="0"
+              VirtualizingPanel.IsVirtualizing="True"
+              VirtualizingPanel.VirtualizationMode="Recycling">
+
         <TreeView.ItemTemplate>
             <HierarchicalDataTemplate ItemsSource="{Binding Children}">
-                <StackPanel Orientation="Horizontal" Margin="0,2">
-                    <TextBlock Text="⚙️ " />
-                    <TextBlock Text="{Binding Process.ImageName}" FontWeight="SemiBold" Foreground="#333"/>
-                    <TextBlock Text=" (PID: " Foreground="Gray"/>
-                    <TextBlock Text="{Binding Process.Pid}" Foreground="{StaticResource AccentColor}"/>
-                    <TextBlock Text=")" Foreground="Gray"/>
-                </StackPanel>
+                <!-- ВАЖНО: Добавлено x:Name="border" -->
+                <Border x:Name="border" Padding="5,2" CornerRadius="4" Background="Transparent">
+                    <StackPanel Orientation="Horizontal" Margin="0,2">
+                        <TextBlock Text="📦 " VerticalAlignment="Center" />
+
+                        <TextBlock Text="{Binding Process.ImageName, Converter={StaticResource PathCleaner}}" 
+                                   FontWeight="SemiBold" 
+                                   Foreground="#2c3e50"
+                                   VerticalAlignment="Center"/>
+
+                        <TextBlock Text="  PID: " Foreground="#95a5a6" VerticalAlignment="Center" FontSize="11"/>
+                        <TextBlock Text="{Binding Process.Pid}" Foreground="#3498db" VerticalAlignment="Center" FontSize="11"/>
+
+                        <Border Background="#ecf0f1" CornerRadius="10" Padding="6,1" Margin="10,0,0,0" 
+                                Visibility="{Binding Children.Count, Converter={StaticResource CountToVisibility}}">
+                            <TextBlock Text="{Binding Children.Count}" FontSize="10" Foreground="#7f8c8d"/>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+                <!-- Исправленный триггер (обращается к x:Name="border") -->
+                <HierarchicalDataTemplate.Triggers>
+                    <Trigger SourceName="border" Property="IsMouseOver" Value="True">
+                        <Setter TargetName="border" Property="Background" Value="#ecf0f1"/>
+                    </Trigger>
+                </HierarchicalDataTemplate.Triggers>
             </HierarchicalDataTemplate>
         </TreeView.ItemTemplate>
     </TreeView>

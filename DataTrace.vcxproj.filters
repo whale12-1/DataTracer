@@ -22,6 +22,18 @@
     <Filter Include="Исходные файлы\ClipboardListener">
       <UniqueIdentifier>{98086afe-487d-46cb-9174-8b9f2cb55c51}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\Collectors">
+      <UniqueIdentifier>{852415cb-2611-490a-87f9-3e707b620b4a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Collectors\Win32kCollector">
+      <UniqueIdentifier>{0c75dcc2-9715-4c2d-acaf-f0e12a1539de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Collectors\CameraCollector">
+      <UniqueIdentifier>{71677fa3-8171-485d-a56f-9abd28c52f6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Collectors\AudioCollector">
+      <UniqueIdentifier>{35f8cbf9-0989-4a5e-88cf-c1d44e3f0c07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -39,6 +51,15 @@
     <ClCompile Include="ClipboardListener.cpp">
       <Filter>Исходные файлы\ClipboardListener</Filter>
     </ClCompile>
+    <ClCompile Include="Win32kCollector.cpp">
+      <Filter>Исходные файлы\Collectors\Win32kCollector</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraCollector.cpp">
+      <Filter>Исходные файлы\Collectors\CameraCollector</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioCollector.cpp">
+      <Filter>Исходные файлы\Collectors\AudioCollector</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DataTrace.Native\events.pb.h">
@@ -52,6 +73,15 @@
     </ClInclude>
     <ClInclude Include="ClipboardListener.h">
       <Filter>Исходные файлы\ClipboardListener</Filter>
+    </ClInclude>
+    <ClInclude Include="Win32kCollector.h">
+      <Filter>Исходные файлы\Collectors\Win32kCollector</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraCollector.h">
+      <Filter>Исходные файлы\Collectors\CameraCollector</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioCollector.h">
+      <Filter>Исходные файлы\Collectors\AudioCollector</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

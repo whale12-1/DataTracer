@@ -131,17 +131,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AudioCollector.cpp" />
+    <ClCompile Include="CameraCollector.cpp" />
     <ClCompile Include="ClipboardListener.cpp" />
     <ClCompile Include="DataTrace.Native\events.pb.cc" />
     <ClCompile Include="EventQueue.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PipeWriter.cpp" />
+    <ClCompile Include="Win32kCollector.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AudioCollector.h" />
+    <ClInclude Include="CameraCollector.h" />
     <ClInclude Include="ClipboardListener.h" />
     <ClInclude Include="DataTrace.Native\events.pb.h" />
     <ClInclude Include="EventQueue.h" />
     <ClInclude Include="PipeWriter.h" />
+    <ClInclude Include="Win32kCollector.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -9,9 +9,67 @@
 #include "EventQueue.h"
 #include "PipeWriter.h"
 #include "ClipboardListener.h"
+#include "Win32kCollector.h"
 #include "DataTrace.Native/events.pb.h"
+#include "CameraCollector.h"
+#include "AudioCollector.h"
 
 #pragma comment(lib, "ws2_32.lib")
+
+
+#include <psapi.h> // Для GetModuleBaseName
+#pragma comment(lib, "psapi.lib")
+
+// Функция для получения имени процесса по PID
+std::wstring GetProcessNameFromPid(DWORD pid) {
+    // Пытаемся открыть процесс с МИНИМАЛЬНЫМИ правами (без VM_READ)
+    HANDLE hProcess = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, FALSE, pid);
+    if (hProcess == NULL) {
+        // Если не удалось (это системный или уже закрытый процесс)
+        DWORD err = GetLastError();
+        if (err == ERROR_ACCESS_DENIED) return L"<Protected>";
+        return L"<Exited>";
+    }
+
+    WCHAR buffer[MAX_PATH];
+    DWORD size = MAX_PATH;
+    std::wstring processName = L"<Unknown>";
+
+    if (QueryFullProcessImageNameW(hProcess, 0, buffer, &size)) {
+        std::wstring fullPath(buffer);
+        size_t pos = fullPath.find_last_of(L"\\/");
+        if (pos != std::wstring::npos) {
+            processName = fullPath.substr(pos + 1);
+        }
+        else {
+            processName = fullPath;
+        }
+    }
+    CloseHandle(hProcess);
+    return processName;
+}
+
+// Глобальный указатель, чтобы обработчик мог достучаться до трейса
+krabs::user_trace* g_trace = nullptr;
+
+// Обработчик системных сигналов (закрытие окна, Ctrl+C)
+BOOL WINAPI ConsoleCtrlHandler(DWORD dwCtrlType) {
+    switch (dwCtrlType) {
+    case CTRL_C_EVENT:       // Нажат Ctrl+C
+    case CTRL_BREAK_EVENT:   // Нажат Ctrl+Break
+    case CTRL_CLOSE_EVENT:   // Закрыто окно консоли (крестик)
+    case CTRL_LOGOFF_EVENT:  // Выход пользователя из системы
+    case CTRL_SHUTDOWN_EVENT:// Выключение компьютера
+        if (g_trace) {
+            std::cout << "\n[Native] Graceful shutdown: stopping ETW session...\n";
+            g_trace->stop(); // Корректно останавливаем сессию!
+        }
+        // Даем ОС 5 секунд, чтобы процесс успел завершиться
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
 
 // Помощник для конвертации wstring в UTF-8 string
 std::string WStringToString(const std::wstring& wstr) {
@@ -49,17 +107,36 @@ int main() {
     std::wstring sessionName = L"DataTraceSession_" + std::to_wstring(GetCurrentProcessId());
     krabs::user_trace trace(sessionName);
 
+    g_trace = &trace; // Сохраняем указатель для обработчика
+    SetConsoleCtrlHandler(ConsoleCtrlHandler, TRUE); // Регистрируем обработчик
+
+
     // --- Провайдер процессов ---
     krabs::provider<> process_provider(L"Microsoft-Windows-Kernel-Process");
     process_provider.any(0x10);
     process_provider.add_on_event_callback([&eventQueue](const EVENT_RECORD& record, const krabs::trace_context& trace_context) {
         krabs::schema schema(record, trace_context.schema_locator);
         krabs::parser parser(schema);
-        if (schema.event_opcode() == 1) {
+
+        if (schema.event_opcode() == 1) { // Process Start
             try {
                 uint32_t pid = parser.parse<uint32_t>(L"ProcessID");
                 uint32_t ppid = parser.parse<uint32_t>(L"ParentProcessID");
-                std::wstring image_name = parser.parse<std::wstring>(L"ImageName");
+
+                std::wstring image_name = L"";
+
+                // 1. Пытаемся прочитать имя прямо из ETW-события (самый быстрый способ)
+                try {
+                    image_name = parser.parse<std::wstring>(L"ImageName");
+                }
+                catch (...) {
+                    // Если в событии нет ImageName, идем в ОС
+                }
+
+                // 2. Если ETW не дал имя, запрашиваем у ОС
+                if (image_name.empty()) {
+                    image_name = GetProcessNameFromPid(pid);
+                }
 
                 datatrace::ProcessEvent p_evt;
                 p_evt.set_pid(pid);
@@ -67,13 +144,15 @@ int main() {
                 p_evt.set_image_name(WStringToString(image_name));
                 p_evt.set_timestamp_utc(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count());
 
-                std::cout << "[ETW] Process found: " << p_evt.image_name() << " (PID: " << pid << ")\n";
+                std::cout << "[ETW] Process found: " << WStringToString(image_name) << " (PID: " << pid << ")\n";
 
                 datatrace::EventWrapper wrapper;
                 *wrapper.mutable_process_event() = p_evt;
                 eventQueue.Push(wrapper);
             }
-            catch (...) {}
+            catch (const std::exception& e) {
+                std::cout << "[ETW] Parse error: " << e.what() << "\n";
+            }
         }
         });
 
@@ -114,11 +193,19 @@ int main() {
             catch (...) {}
         }
         });
+    krabs::provider<> win32k_provider(L"Microsoft-Windows-Win32k");
+    Win32kCollector::SetupProvider(win32k_provider, eventQueue);
 
+    krabs::provider<> camera_provider(L"Microsoft-Windows-USBVideo");
+    CameraCollector::SetupProvider(camera_provider, eventQueue);
+
+    krabs::provider<> audio_provider(L"Microsoft-Windows-Audio");
+    AudioCollector::SetupProvider(audio_provider, eventQueue);
     // 3. Запуск ETW
     try {
         trace.enable(process_provider);
         trace.enable(network_provider);
+        trace.enable(win32k_provider);
         std::cout << "[Native] Waiting for system events...\n";
         trace.start(); // Блокирующий вызов
     }

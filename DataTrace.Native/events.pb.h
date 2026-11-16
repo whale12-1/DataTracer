@@ -53,6 +53,14 @@ extern "C" {
 extern const ::google::protobuf::internal::DescriptorTable descriptor_table_events_2eproto;
 }  // extern "C"
 namespace datatrace {
+class AudioEvent;
+struct AudioEventDefaultTypeInternal;
+extern AudioEventDefaultTypeInternal _AudioEvent_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull AudioEvent_class_data_;
+class CameraEvent;
+struct CameraEventDefaultTypeInternal;
+extern CameraEventDefaultTypeInternal _CameraEvent_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull CameraEvent_class_data_;
 class ClipboardEvent;
 struct ClipboardEventDefaultTypeInternal;
 extern ClipboardEventDefaultTypeInternal _ClipboardEvent_default_instance_;
@@ -69,6 +77,10 @@ class ProcessEvent;
 struct ProcessEventDefaultTypeInternal;
 extern ProcessEventDefaultTypeInternal _ProcessEvent_default_instance_;
 extern const ::google::protobuf::internal::ClassDataFull ProcessEvent_class_data_;
+class Win32kEvent;
+struct Win32kEventDefaultTypeInternal;
+extern Win32kEventDefaultTypeInternal _Win32kEvent_default_instance_;
+extern const ::google::protobuf::internal::ClassDataFull Win32kEvent_class_data_;
 }  // namespace datatrace
 namespace google {
 namespace protobuf {
@@ -80,6 +92,254 @@ namespace datatrace {
 // ===================================================================
 
 
+// -------------------------------------------------------------------
+
+class Win32kEvent final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:datatrace.Win32kEvent) */ {
+ public:
+  inline Win32kEvent() : Win32kEvent(nullptr) {}
+  ~Win32kEvent() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(Win32kEvent* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(Win32kEvent));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR Win32kEvent(::google::protobuf::internal::ConstantInitialized);
+
+  inline Win32kEvent(const Win32kEvent& from) : Win32kEvent(nullptr, from) {}
+  inline Win32kEvent(Win32kEvent&& from) noexcept
+      : Win32kEvent(nullptr, ::std::move(from)) {}
+  inline Win32kEvent& operator=(const Win32kEvent& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline Win32kEvent& operator=(Win32kEvent&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const Win32kEvent& default_instance() {
+    return *reinterpret_cast<const Win32kEvent*>(
+        &_Win32kEvent_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 3;
+  friend void swap(Win32kEvent& a, Win32kEvent& b) { a.Swap(&b); }
+  inline void Swap(Win32kEvent* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(Win32kEvent* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  Win32kEvent* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<Win32kEvent>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const Win32kEvent& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const Win32kEvent& from) { Win32kEvent::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(Win32kEvent* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "datatrace.Win32kEvent"; }
+
+  explicit Win32kEvent(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  Win32kEvent(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Win32kEvent& from);
+  Win32kEvent(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, Win32kEvent&& from) noexcept
+      : Win32kEvent(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kApiNameFieldNumber = 3,
+    kDetailsFieldNumber = 4,
+    kPidFieldNumber = 1,
+    kEventIdFieldNumber = 2,
+    kTimestampUtcFieldNumber = 5,
+  };
+  // string api_name = 3;
+  void clear_api_name() ;
+  const ::std::string& api_name() const;
+  template <typename Arg_ = const ::std::string&, typename... Args_>
+  void set_api_name(Arg_&& arg, Args_... args);
+  ::std::string* PROTOBUF_NONNULL mutable_api_name();
+  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_api_name();
+  void set_allocated_api_name(::std::string* PROTOBUF_NULLABLE value);
+
+  private:
+  const ::std::string& _internal_api_name() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_api_name(const ::std::string& value);
+  ::std::string* PROTOBUF_NONNULL _internal_mutable_api_name();
+
+  public:
+  // string details = 4;
+  void clear_details() ;
+  const ::std::string& details() const;
+  template <typename Arg_ = const ::std::string&, typename... Args_>
+  void set_details(Arg_&& arg, Args_... args);
+  ::std::string* PROTOBUF_NONNULL mutable_details();
+  [[nodiscard]] ::std::string* PROTOBUF_NULLABLE release_details();
+  void set_allocated_details(::std::string* PROTOBUF_NULLABLE value);
+
+  private:
+  const ::std::string& _internal_details() const;
+  PROTOBUF_ALWAYS_INLINE void _internal_set_details(const ::std::string& value);
+  ::std::string* PROTOBUF_NONNULL _internal_mutable_details();
+
+  public:
+  // uint32 pid = 1;
+  void clear_pid() ;
+  ::uint32_t pid() const;
+  void set_pid(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_pid() const;
+  void _internal_set_pid(::uint32_t value);
+
+  public:
+  // uint32 event_id = 2;
+  void clear_event_id() ;
+  ::uint32_t event_id() const;
+  void set_event_id(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_event_id() const;
+  void _internal_set_event_id(::uint32_t value);
+
+  public:
+  // int64 timestamp_utc = 5;
+  void clear_timestamp_utc() ;
+  ::int64_t timestamp_utc() const;
+  void set_timestamp_utc(::int64_t value);
+
+  private:
+  ::int64_t _internal_timestamp_utc() const;
+  void _internal_set_timestamp_utc(::int64_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:datatrace.Win32kEvent)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<3, 5,
+                                   0, 45,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const Win32kEvent& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::google::protobuf::internal::ArenaStringPtr api_name_;
+    ::google::protobuf::internal::ArenaStringPtr details_;
+    ::uint32_t pid_;
+    ::uint32_t event_id_;
+    ::int64_t timestamp_utc_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_events_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull Win32kEvent_class_data_;
 // -------------------------------------------------------------------
 
 class ProcessEvent final : public ::google::protobuf::Message
@@ -792,6 +1052,410 @@ class ClipboardEvent final : public ::google::protobuf::Message
 extern const ::google::protobuf::internal::ClassDataFull ClipboardEvent_class_data_;
 // -------------------------------------------------------------------
 
+class CameraEvent final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:datatrace.CameraEvent) */ {
+ public:
+  inline CameraEvent() : CameraEvent(nullptr) {}
+  ~CameraEvent() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(CameraEvent* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(CameraEvent));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR CameraEvent(::google::protobuf::internal::ConstantInitialized);
+
+  inline CameraEvent(const CameraEvent& from) : CameraEvent(nullptr, from) {}
+  inline CameraEvent(CameraEvent&& from) noexcept
+      : CameraEvent(nullptr, ::std::move(from)) {}
+  inline CameraEvent& operator=(const CameraEvent& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline CameraEvent& operator=(CameraEvent&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const CameraEvent& default_instance() {
+    return *reinterpret_cast<const CameraEvent*>(
+        &_CameraEvent_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 4;
+  friend void swap(CameraEvent& a, CameraEvent& b) { a.Swap(&b); }
+  inline void Swap(CameraEvent* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(CameraEvent* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  CameraEvent* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<CameraEvent>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const CameraEvent& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const CameraEvent& from) { CameraEvent::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(CameraEvent* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "datatrace.CameraEvent"; }
+
+  explicit CameraEvent(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  CameraEvent(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const CameraEvent& from);
+  CameraEvent(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, CameraEvent&& from) noexcept
+      : CameraEvent(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kTimestampUtcFieldNumber = 2,
+    kPidFieldNumber = 1,
+  };
+  // int64 timestamp_utc = 2;
+  void clear_timestamp_utc() ;
+  ::int64_t timestamp_utc() const;
+  void set_timestamp_utc(::int64_t value);
+
+  private:
+  ::int64_t _internal_timestamp_utc() const;
+  void _internal_set_timestamp_utc(::int64_t value);
+
+  public:
+  // uint32 pid = 1;
+  void clear_pid() ;
+  ::uint32_t pid() const;
+  void set_pid(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_pid() const;
+  void _internal_set_pid(::uint32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:datatrace.CameraEvent)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<1, 2,
+                                   0, 0,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const CameraEvent& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::int64_t timestamp_utc_;
+    ::uint32_t pid_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_events_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull CameraEvent_class_data_;
+// -------------------------------------------------------------------
+
+class AudioEvent final : public ::google::protobuf::Message
+/* @@protoc_insertion_point(class_definition:datatrace.AudioEvent) */ {
+ public:
+  inline AudioEvent() : AudioEvent(nullptr) {}
+  ~AudioEvent() PROTOBUF_FINAL;
+
+#if defined(PROTOBUF_CUSTOM_VTABLE)
+  void operator delete(AudioEvent* PROTOBUF_NONNULL msg, ::std::destroying_delete_t) {
+    SharedDtor(*msg);
+    ::google::protobuf::internal::SizedDelete(msg, sizeof(AudioEvent));
+  }
+#endif
+
+  template <typename = void>
+  explicit PROTOBUF_CONSTEXPR AudioEvent(::google::protobuf::internal::ConstantInitialized);
+
+  inline AudioEvent(const AudioEvent& from) : AudioEvent(nullptr, from) {}
+  inline AudioEvent(AudioEvent&& from) noexcept
+      : AudioEvent(nullptr, ::std::move(from)) {}
+  inline AudioEvent& operator=(const AudioEvent& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline AudioEvent& operator=(AudioEvent&& from) noexcept {
+    if (this == &from) return *this;
+    if (::google::protobuf::internal::CanMoveWithInternalSwap(GetArena(), from.GetArena())) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.unknown_fields<::google::protobuf::UnknownFieldSet>(::google::protobuf::UnknownFieldSet::default_instance);
+  }
+  inline ::google::protobuf::UnknownFieldSet* PROTOBUF_NONNULL mutable_unknown_fields()
+      ABSL_ATTRIBUTE_LIFETIME_BOUND {
+    return _internal_metadata_.mutable_unknown_fields<::google::protobuf::UnknownFieldSet>();
+  }
+
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL descriptor() {
+    return GetDescriptor();
+  }
+  static const ::google::protobuf::Descriptor* PROTOBUF_NONNULL GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::google::protobuf::Reflection* PROTOBUF_NONNULL GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const AudioEvent& default_instance() {
+    return *reinterpret_cast<const AudioEvent*>(
+        &_AudioEvent_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages = 5;
+  friend void swap(AudioEvent& a, AudioEvent& b) { a.Swap(&b); }
+  inline void Swap(AudioEvent* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    if (::google::protobuf::internal::CanUseInternalSwap(GetArena(), other->GetArena())) {
+      InternalSwap(other);
+    } else {
+      ::google::protobuf::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(AudioEvent* PROTOBUF_NONNULL other) {
+    if (other == this) return;
+    ABSL_DCHECK(GetArena() == other->GetArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  AudioEvent* PROTOBUF_NONNULL New(::google::protobuf::Arena* PROTOBUF_NULLABLE arena = nullptr) const {
+    return ::google::protobuf::Message::DefaultConstruct<AudioEvent>(arena);
+  }
+  using ::google::protobuf::Message::CopyFrom;
+  void CopyFrom(const AudioEvent& from);
+  using ::google::protobuf::Message::MergeFrom;
+  void MergeFrom(const AudioEvent& from) { AudioEvent::MergeImpl(*this, from); }
+
+  private:
+  static void MergeImpl(::google::protobuf::MessageLite& to_msg,
+                        const ::google::protobuf::MessageLite& from_msg);
+
+  public:
+  bool IsInitialized() const {
+    return true;
+  }
+  ABSL_ATTRIBUTE_REINITIALIZES void Clear() PROTOBUF_FINAL;
+  #if defined(PROTOBUF_CUSTOM_VTABLE)
+  private:
+  static ::size_t ByteSizeLong(const ::google::protobuf::MessageLite& msg);
+  static ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      const ::google::protobuf::MessageLite& msg, ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream);
+
+  public:
+  ::size_t ByteSizeLong() const { return ByteSizeLong(*this); }
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const {
+    return _InternalSerialize(*this, target, stream);
+  }
+  #else   // PROTOBUF_CUSTOM_VTABLE
+  ::size_t ByteSizeLong() const final;
+  ::uint8_t* PROTOBUF_NONNULL _InternalSerialize(
+      ::uint8_t* PROTOBUF_NONNULL target,
+      ::google::protobuf::io::EpsCopyOutputStream* PROTOBUF_NONNULL stream) const final;
+  #endif  // PROTOBUF_CUSTOM_VTABLE
+  int GetCachedSize() const { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static void SharedDtor(MessageLite& self);
+  void InternalSwap(AudioEvent* PROTOBUF_NONNULL other);
+ private:
+  template <typename T>
+  friend ::absl::string_view(::google::protobuf::internal::GetAnyMessageName)();
+  static ::absl::string_view FullMessageName() { return "datatrace.AudioEvent"; }
+
+  explicit AudioEvent(::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  AudioEvent(::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const AudioEvent& from);
+  AudioEvent(
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, AudioEvent&& from) noexcept
+      : AudioEvent(arena) {
+    *this = ::std::move(from);
+  }
+  const ::google::protobuf::internal::ClassData* PROTOBUF_NONNULL GetClassData() const PROTOBUF_FINAL;
+  static void* PROTOBUF_NONNULL PlacementNew_(
+      const void* PROTOBUF_NONNULL, void* PROTOBUF_NONNULL mem,
+      ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+  static constexpr auto InternalNewImpl_();
+
+ public:
+  static constexpr auto InternalGenerateClassData_();
+
+  ::google::protobuf::Metadata GetMetadata() const;
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+  enum : int {
+    kTimestampUtcFieldNumber = 2,
+    kPidFieldNumber = 1,
+  };
+  // int64 timestamp_utc = 2;
+  void clear_timestamp_utc() ;
+  ::int64_t timestamp_utc() const;
+  void set_timestamp_utc(::int64_t value);
+
+  private:
+  ::int64_t _internal_timestamp_utc() const;
+  void _internal_set_timestamp_utc(::int64_t value);
+
+  public:
+  // uint32 pid = 1;
+  void clear_pid() ;
+  ::uint32_t pid() const;
+  void set_pid(::uint32_t value);
+
+  private:
+  ::uint32_t _internal_pid() const;
+  void _internal_set_pid(::uint32_t value);
+
+  public:
+  // @@protoc_insertion_point(class_scope:datatrace.AudioEvent)
+ private:
+  class _Internal;
+  friend class ::google::protobuf::internal::TcParser;
+  static const ::google::protobuf::internal::TcParseTable<1, 2,
+                                   0, 0,
+                                   2>
+      _table_;
+
+  friend class ::google::protobuf::MessageLite;
+  friend class ::google::protobuf::Arena;
+  template <typename T>
+  friend class ::google::protobuf::Arena::InternalHelper;
+  using InternalArenaConstructable_ = void;
+  using DestructorSkippable_ = void;
+  struct Impl_ {
+    inline explicit constexpr Impl_(::google::protobuf::internal::ConstantInitialized) noexcept;
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena);
+    inline explicit Impl_(
+        ::google::protobuf::internal::InternalVisibility visibility,
+        ::google::protobuf::Arena* PROTOBUF_NULLABLE arena, const Impl_& from,
+        const AudioEvent& from_msg);
+    ::google::protobuf::internal::HasBits<1> _has_bits_;
+    ::google::protobuf::internal::CachedSize _cached_size_;
+    ::int64_t timestamp_utc_;
+    ::uint32_t pid_;
+    PROTOBUF_TSAN_DECLARE_MEMBER
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_events_2eproto;
+};
+
+extern const ::google::protobuf::internal::ClassDataFull AudioEvent_class_data_;
+// -------------------------------------------------------------------
+
 class EventWrapper final : public ::google::protobuf::Message
 /* @@protoc_insertion_point(class_definition:datatrace.EventWrapper) */ {
  public:
@@ -851,9 +1515,12 @@ class EventWrapper final : public ::google::protobuf::Message
     kProcessEvent = 1,
     kNetworkEvent = 2,
     kClipboardEvent = 3,
+    kWin32KEvent = 4,
+    kCameraEvent = 5,
+    kAudioEvent = 6,
     PAYLOAD_NOT_SET = 0,
   };
-  static constexpr int kIndexInFileMessages = 3;
+  static constexpr int kIndexInFileMessages = 6;
   friend void swap(EventWrapper& a, EventWrapper& b) { a.Swap(&b); }
   inline void Swap(EventWrapper* PROTOBUF_NONNULL other) {
     if (other == this) return;
@@ -943,6 +1610,9 @@ class EventWrapper final : public ::google::protobuf::Message
     kProcessEventFieldNumber = 1,
     kNetworkEventFieldNumber = 2,
     kClipboardEventFieldNumber = 3,
+    kWin32KEventFieldNumber = 4,
+    kCameraEventFieldNumber = 5,
+    kAudioEventFieldNumber = 6,
   };
   // .datatrace.ProcessEvent process_event = 1;
   bool has_process_event() const;
@@ -1001,6 +1671,63 @@ class EventWrapper final : public ::google::protobuf::Message
   ::datatrace::ClipboardEvent* PROTOBUF_NONNULL _internal_mutable_clipboard_event();
 
   public:
+  // .datatrace.Win32kEvent win32k_event = 4;
+  bool has_win32k_event() const;
+  private:
+  bool _internal_has_win32k_event() const;
+
+  public:
+  void clear_win32k_event() ;
+  const ::datatrace::Win32kEvent& win32k_event() const;
+  [[nodiscard]] ::datatrace::Win32kEvent* PROTOBUF_NULLABLE release_win32k_event();
+  ::datatrace::Win32kEvent* PROTOBUF_NONNULL mutable_win32k_event();
+  void set_allocated_win32k_event(::datatrace::Win32kEvent* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_win32k_event(::datatrace::Win32kEvent* PROTOBUF_NULLABLE value);
+  ::datatrace::Win32kEvent* PROTOBUF_NULLABLE unsafe_arena_release_win32k_event();
+
+  private:
+  const ::datatrace::Win32kEvent& _internal_win32k_event() const;
+  ::datatrace::Win32kEvent* PROTOBUF_NONNULL _internal_mutable_win32k_event();
+
+  public:
+  // .datatrace.CameraEvent camera_event = 5;
+  bool has_camera_event() const;
+  private:
+  bool _internal_has_camera_event() const;
+
+  public:
+  void clear_camera_event() ;
+  const ::datatrace::CameraEvent& camera_event() const;
+  [[nodiscard]] ::datatrace::CameraEvent* PROTOBUF_NULLABLE release_camera_event();
+  ::datatrace::CameraEvent* PROTOBUF_NONNULL mutable_camera_event();
+  void set_allocated_camera_event(::datatrace::CameraEvent* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_camera_event(::datatrace::CameraEvent* PROTOBUF_NULLABLE value);
+  ::datatrace::CameraEvent* PROTOBUF_NULLABLE unsafe_arena_release_camera_event();
+
+  private:
+  const ::datatrace::CameraEvent& _internal_camera_event() const;
+  ::datatrace::CameraEvent* PROTOBUF_NONNULL _internal_mutable_camera_event();
+
+  public:
+  // .datatrace.AudioEvent audio_event = 6;
+  bool has_audio_event() const;
+  private:
+  bool _internal_has_audio_event() const;
+
+  public:
+  void clear_audio_event() ;
+  const ::datatrace::AudioEvent& audio_event() const;
+  [[nodiscard]] ::datatrace::AudioEvent* PROTOBUF_NULLABLE release_audio_event();
+  ::datatrace::AudioEvent* PROTOBUF_NONNULL mutable_audio_event();
+  void set_allocated_audio_event(::datatrace::AudioEvent* PROTOBUF_NULLABLE value);
+  void unsafe_arena_set_allocated_audio_event(::datatrace::AudioEvent* PROTOBUF_NULLABLE value);
+  ::datatrace::AudioEvent* PROTOBUF_NULLABLE unsafe_arena_release_audio_event();
+
+  private:
+  const ::datatrace::AudioEvent& _internal_audio_event() const;
+  ::datatrace::AudioEvent* PROTOBUF_NONNULL _internal_mutable_audio_event();
+
+  public:
   void clear_payload();
   PayloadCase payload_case() const;
   // @@protoc_insertion_point(class_scope:datatrace.EventWrapper)
@@ -1009,11 +1736,14 @@ class EventWrapper final : public ::google::protobuf::Message
   void set_has_process_event();
   void set_has_network_event();
   void set_has_clipboard_event();
+  void set_has_win32k_event();
+  void set_has_camera_event();
+  void set_has_audio_event();
   inline bool has_payload() const;
   inline void clear_has_payload();
   friend class ::google::protobuf::internal::TcParser;
-  static const ::google::protobuf::internal::TcParseTable<0, 3,
-                                   3, 0,
+  static const ::google::protobuf::internal::TcParseTable<0, 6,
+                                   6, 0,
                                    2>
       _table_;
 
@@ -1038,6 +1768,9 @@ class EventWrapper final : public ::google::protobuf::Message
       ::google::protobuf::Message* PROTOBUF_NULLABLE process_event_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE network_event_;
       ::google::protobuf::Message* PROTOBUF_NULLABLE clipboard_event_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE win32k_event_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE camera_event_;
+      ::google::protobuf::Message* PROTOBUF_NULLABLE audio_event_;
     } payload_;
     ::google::protobuf::internal::CachedSize _cached_size_;
     ::uint32_t _oneof_case_[1];
@@ -1560,6 +2293,323 @@ inline void ClipboardEvent::_internal_set_timestamp_utc(::int64_t value) {
 
 // -------------------------------------------------------------------
 
+// Win32kEvent
+
+// uint32 pid = 1;
+inline void Win32kEvent::clear_pid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.pid_ = 0u;
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000004U);
+}
+inline ::uint32_t Win32kEvent::pid() const {
+  // @@protoc_insertion_point(field_get:datatrace.Win32kEvent.pid)
+  return _internal_pid();
+}
+inline void Win32kEvent::set_pid(::uint32_t value) {
+  _internal_set_pid(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000004U);
+  // @@protoc_insertion_point(field_set:datatrace.Win32kEvent.pid)
+}
+inline ::uint32_t Win32kEvent::_internal_pid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.pid_;
+}
+inline void Win32kEvent::_internal_set_pid(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.pid_ = value;
+}
+
+// uint32 event_id = 2;
+inline void Win32kEvent::clear_event_id() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.event_id_ = 0u;
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000008U);
+}
+inline ::uint32_t Win32kEvent::event_id() const {
+  // @@protoc_insertion_point(field_get:datatrace.Win32kEvent.event_id)
+  return _internal_event_id();
+}
+inline void Win32kEvent::set_event_id(::uint32_t value) {
+  _internal_set_event_id(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000008U);
+  // @@protoc_insertion_point(field_set:datatrace.Win32kEvent.event_id)
+}
+inline ::uint32_t Win32kEvent::_internal_event_id() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.event_id_;
+}
+inline void Win32kEvent::_internal_set_event_id(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.event_id_ = value;
+}
+
+// string api_name = 3;
+inline void Win32kEvent::clear_api_name() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.api_name_.ClearToEmpty();
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000001U);
+}
+inline const ::std::string& Win32kEvent::api_name() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:datatrace.Win32kEvent.api_name)
+  return _internal_api_name();
+}
+template <typename Arg_, typename... Args_>
+PROTOBUF_ALWAYS_INLINE void Win32kEvent::set_api_name(Arg_&& arg, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
+  _impl_.api_name_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:datatrace.Win32kEvent.api_name)
+}
+inline ::std::string* PROTOBUF_NONNULL Win32kEvent::mutable_api_name()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
+  ::std::string* _s = _internal_mutable_api_name();
+  // @@protoc_insertion_point(field_mutable:datatrace.Win32kEvent.api_name)
+  return _s;
+}
+inline const ::std::string& Win32kEvent::_internal_api_name() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.api_name_.Get();
+}
+inline void Win32kEvent::_internal_set_api_name(const ::std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.api_name_.Set(value, GetArena());
+}
+inline ::std::string* PROTOBUF_NONNULL Win32kEvent::_internal_mutable_api_name() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.api_name_.Mutable( GetArena());
+}
+inline ::std::string* PROTOBUF_NULLABLE Win32kEvent::release_api_name() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:datatrace.Win32kEvent.api_name)
+  if (!CheckHasBit(_impl_._has_bits_[0], 0x00000001U)) {
+    return nullptr;
+  }
+  ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
+  auto* released = _impl_.api_name_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.api_name_.Set("", GetArena());
+  }
+  return released;
+}
+inline void Win32kEvent::set_allocated_api_name(::std::string* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    SetHasBit(_impl_._has_bits_[0], 0x00000001U);
+  } else {
+    ClearHasBit(_impl_._has_bits_[0], 0x00000001U);
+  }
+  _impl_.api_name_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.api_name_.IsDefault()) {
+    _impl_.api_name_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:datatrace.Win32kEvent.api_name)
+}
+
+// string details = 4;
+inline void Win32kEvent::clear_details() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.details_.ClearToEmpty();
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000002U);
+}
+inline const ::std::string& Win32kEvent::details() const
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:datatrace.Win32kEvent.details)
+  return _internal_details();
+}
+template <typename Arg_, typename... Args_>
+PROTOBUF_ALWAYS_INLINE void Win32kEvent::set_details(Arg_&& arg, Args_... args) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  _impl_.details_.Set(static_cast<Arg_&&>(arg), args..., GetArena());
+  // @@protoc_insertion_point(field_set:datatrace.Win32kEvent.details)
+}
+inline ::std::string* PROTOBUF_NONNULL Win32kEvent::mutable_details()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  ::std::string* _s = _internal_mutable_details();
+  // @@protoc_insertion_point(field_mutable:datatrace.Win32kEvent.details)
+  return _s;
+}
+inline const ::std::string& Win32kEvent::_internal_details() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.details_.Get();
+}
+inline void Win32kEvent::_internal_set_details(const ::std::string& value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.details_.Set(value, GetArena());
+}
+inline ::std::string* PROTOBUF_NONNULL Win32kEvent::_internal_mutable_details() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  return _impl_.details_.Mutable( GetArena());
+}
+inline ::std::string* PROTOBUF_NULLABLE Win32kEvent::release_details() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  // @@protoc_insertion_point(field_release:datatrace.Win32kEvent.details)
+  if (!CheckHasBit(_impl_._has_bits_[0], 0x00000002U)) {
+    return nullptr;
+  }
+  ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
+  auto* released = _impl_.details_.Release();
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString()) {
+    _impl_.details_.Set("", GetArena());
+  }
+  return released;
+}
+inline void Win32kEvent::set_allocated_details(::std::string* PROTOBUF_NULLABLE value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (value != nullptr) {
+    SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  } else {
+    ClearHasBit(_impl_._has_bits_[0], 0x00000002U);
+  }
+  _impl_.details_.SetAllocated(value, GetArena());
+  if (::google::protobuf::internal::DebugHardenForceCopyDefaultString() && _impl_.details_.IsDefault()) {
+    _impl_.details_.Set("", GetArena());
+  }
+  // @@protoc_insertion_point(field_set_allocated:datatrace.Win32kEvent.details)
+}
+
+// int64 timestamp_utc = 5;
+inline void Win32kEvent::clear_timestamp_utc() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_utc_ = ::int64_t{0};
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000010U);
+}
+inline ::int64_t Win32kEvent::timestamp_utc() const {
+  // @@protoc_insertion_point(field_get:datatrace.Win32kEvent.timestamp_utc)
+  return _internal_timestamp_utc();
+}
+inline void Win32kEvent::set_timestamp_utc(::int64_t value) {
+  _internal_set_timestamp_utc(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000010U);
+  // @@protoc_insertion_point(field_set:datatrace.Win32kEvent.timestamp_utc)
+}
+inline ::int64_t Win32kEvent::_internal_timestamp_utc() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.timestamp_utc_;
+}
+inline void Win32kEvent::_internal_set_timestamp_utc(::int64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_utc_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// CameraEvent
+
+// uint32 pid = 1;
+inline void CameraEvent::clear_pid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.pid_ = 0u;
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000002U);
+}
+inline ::uint32_t CameraEvent::pid() const {
+  // @@protoc_insertion_point(field_get:datatrace.CameraEvent.pid)
+  return _internal_pid();
+}
+inline void CameraEvent::set_pid(::uint32_t value) {
+  _internal_set_pid(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  // @@protoc_insertion_point(field_set:datatrace.CameraEvent.pid)
+}
+inline ::uint32_t CameraEvent::_internal_pid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.pid_;
+}
+inline void CameraEvent::_internal_set_pid(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.pid_ = value;
+}
+
+// int64 timestamp_utc = 2;
+inline void CameraEvent::clear_timestamp_utc() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_utc_ = ::int64_t{0};
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000001U);
+}
+inline ::int64_t CameraEvent::timestamp_utc() const {
+  // @@protoc_insertion_point(field_get:datatrace.CameraEvent.timestamp_utc)
+  return _internal_timestamp_utc();
+}
+inline void CameraEvent::set_timestamp_utc(::int64_t value) {
+  _internal_set_timestamp_utc(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
+  // @@protoc_insertion_point(field_set:datatrace.CameraEvent.timestamp_utc)
+}
+inline ::int64_t CameraEvent::_internal_timestamp_utc() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.timestamp_utc_;
+}
+inline void CameraEvent::_internal_set_timestamp_utc(::int64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_utc_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// AudioEvent
+
+// uint32 pid = 1;
+inline void AudioEvent::clear_pid() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.pid_ = 0u;
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000002U);
+}
+inline ::uint32_t AudioEvent::pid() const {
+  // @@protoc_insertion_point(field_get:datatrace.AudioEvent.pid)
+  return _internal_pid();
+}
+inline void AudioEvent::set_pid(::uint32_t value) {
+  _internal_set_pid(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000002U);
+  // @@protoc_insertion_point(field_set:datatrace.AudioEvent.pid)
+}
+inline ::uint32_t AudioEvent::_internal_pid() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.pid_;
+}
+inline void AudioEvent::_internal_set_pid(::uint32_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.pid_ = value;
+}
+
+// int64 timestamp_utc = 2;
+inline void AudioEvent::clear_timestamp_utc() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_utc_ = ::int64_t{0};
+  ClearHasBit(_impl_._has_bits_[0],
+                  0x00000001U);
+}
+inline ::int64_t AudioEvent::timestamp_utc() const {
+  // @@protoc_insertion_point(field_get:datatrace.AudioEvent.timestamp_utc)
+  return _internal_timestamp_utc();
+}
+inline void AudioEvent::set_timestamp_utc(::int64_t value) {
+  _internal_set_timestamp_utc(value);
+  SetHasBit(_impl_._has_bits_[0], 0x00000001U);
+  // @@protoc_insertion_point(field_set:datatrace.AudioEvent.timestamp_utc)
+}
+inline ::int64_t AudioEvent::_internal_timestamp_utc() const {
+  ::google::protobuf::internal::TSanRead(&_impl_);
+  return _impl_.timestamp_utc_;
+}
+inline void AudioEvent::_internal_set_timestamp_utc(::int64_t value) {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  _impl_.timestamp_utc_ = value;
+}
+
+// -------------------------------------------------------------------
+
 // EventWrapper
 
 // .datatrace.ProcessEvent process_event = 1;
@@ -1805,6 +2855,252 @@ inline ::datatrace::ClipboardEvent* PROTOBUF_NONNULL EventWrapper::mutable_clipb
     ABSL_ATTRIBUTE_LIFETIME_BOUND {
   ::datatrace::ClipboardEvent* _msg = _internal_mutable_clipboard_event();
   // @@protoc_insertion_point(field_mutable:datatrace.EventWrapper.clipboard_event)
+  return _msg;
+}
+
+// .datatrace.Win32kEvent win32k_event = 4;
+inline bool EventWrapper::has_win32k_event() const {
+  return payload_case() == kWin32KEvent;
+}
+inline bool EventWrapper::_internal_has_win32k_event() const {
+  return payload_case() == kWin32KEvent;
+}
+inline void EventWrapper::set_has_win32k_event() {
+  _impl_._oneof_case_[0] = kWin32KEvent;
+}
+inline void EventWrapper::clear_win32k_event() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (payload_case() == kWin32KEvent) {
+    if (GetArena() == nullptr) {
+      delete _impl_.payload_.win32k_event_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.payload_.win32k_event_);
+    }
+    clear_has_payload();
+  }
+}
+inline ::datatrace::Win32kEvent* PROTOBUF_NULLABLE EventWrapper::release_win32k_event() {
+  // @@protoc_insertion_point(field_release:datatrace.EventWrapper.win32k_event)
+  if (payload_case() == kWin32KEvent) {
+    clear_has_payload();
+    auto* temp = reinterpret_cast<::datatrace::Win32kEvent*>(_impl_.payload_.win32k_event_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.payload_.win32k_event_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::datatrace::Win32kEvent& EventWrapper::_internal_win32k_event() const {
+  return payload_case() == kWin32KEvent ? static_cast<const ::datatrace::Win32kEvent&>(*reinterpret_cast<::datatrace::Win32kEvent*>(_impl_.payload_.win32k_event_))
+                     : reinterpret_cast<const ::datatrace::Win32kEvent&>(::datatrace::_Win32kEvent_default_instance_);
+}
+inline const ::datatrace::Win32kEvent& EventWrapper::win32k_event() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:datatrace.EventWrapper.win32k_event)
+  return _internal_win32k_event();
+}
+inline ::datatrace::Win32kEvent* PROTOBUF_NULLABLE EventWrapper::unsafe_arena_release_win32k_event() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:datatrace.EventWrapper.win32k_event)
+  if (payload_case() == kWin32KEvent) {
+    clear_has_payload();
+    auto* temp = reinterpret_cast<::datatrace::Win32kEvent*>(_impl_.payload_.win32k_event_);
+    _impl_.payload_.win32k_event_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void EventWrapper::unsafe_arena_set_allocated_win32k_event(
+    ::datatrace::Win32kEvent* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_payload();
+  if (value) {
+    set_has_win32k_event();
+    _impl_.payload_.win32k_event_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:datatrace.EventWrapper.win32k_event)
+}
+inline ::datatrace::Win32kEvent* PROTOBUF_NONNULL EventWrapper::_internal_mutable_win32k_event() {
+  if (payload_case() != kWin32KEvent) {
+    clear_payload();
+    set_has_win32k_event();
+    _impl_.payload_.win32k_event_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::datatrace::Win32kEvent>(GetArena()));
+  }
+  return reinterpret_cast<::datatrace::Win32kEvent*>(_impl_.payload_.win32k_event_);
+}
+inline ::datatrace::Win32kEvent* PROTOBUF_NONNULL EventWrapper::mutable_win32k_event()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::datatrace::Win32kEvent* _msg = _internal_mutable_win32k_event();
+  // @@protoc_insertion_point(field_mutable:datatrace.EventWrapper.win32k_event)
+  return _msg;
+}
+
+// .datatrace.CameraEvent camera_event = 5;
+inline bool EventWrapper::has_camera_event() const {
+  return payload_case() == kCameraEvent;
+}
+inline bool EventWrapper::_internal_has_camera_event() const {
+  return payload_case() == kCameraEvent;
+}
+inline void EventWrapper::set_has_camera_event() {
+  _impl_._oneof_case_[0] = kCameraEvent;
+}
+inline void EventWrapper::clear_camera_event() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (payload_case() == kCameraEvent) {
+    if (GetArena() == nullptr) {
+      delete _impl_.payload_.camera_event_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.payload_.camera_event_);
+    }
+    clear_has_payload();
+  }
+}
+inline ::datatrace::CameraEvent* PROTOBUF_NULLABLE EventWrapper::release_camera_event() {
+  // @@protoc_insertion_point(field_release:datatrace.EventWrapper.camera_event)
+  if (payload_case() == kCameraEvent) {
+    clear_has_payload();
+    auto* temp = reinterpret_cast<::datatrace::CameraEvent*>(_impl_.payload_.camera_event_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.payload_.camera_event_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::datatrace::CameraEvent& EventWrapper::_internal_camera_event() const {
+  return payload_case() == kCameraEvent ? static_cast<const ::datatrace::CameraEvent&>(*reinterpret_cast<::datatrace::CameraEvent*>(_impl_.payload_.camera_event_))
+                     : reinterpret_cast<const ::datatrace::CameraEvent&>(::datatrace::_CameraEvent_default_instance_);
+}
+inline const ::datatrace::CameraEvent& EventWrapper::camera_event() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:datatrace.EventWrapper.camera_event)
+  return _internal_camera_event();
+}
+inline ::datatrace::CameraEvent* PROTOBUF_NULLABLE EventWrapper::unsafe_arena_release_camera_event() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:datatrace.EventWrapper.camera_event)
+  if (payload_case() == kCameraEvent) {
+    clear_has_payload();
+    auto* temp = reinterpret_cast<::datatrace::CameraEvent*>(_impl_.payload_.camera_event_);
+    _impl_.payload_.camera_event_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void EventWrapper::unsafe_arena_set_allocated_camera_event(
+    ::datatrace::CameraEvent* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_payload();
+  if (value) {
+    set_has_camera_event();
+    _impl_.payload_.camera_event_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:datatrace.EventWrapper.camera_event)
+}
+inline ::datatrace::CameraEvent* PROTOBUF_NONNULL EventWrapper::_internal_mutable_camera_event() {
+  if (payload_case() != kCameraEvent) {
+    clear_payload();
+    set_has_camera_event();
+    _impl_.payload_.camera_event_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::datatrace::CameraEvent>(GetArena()));
+  }
+  return reinterpret_cast<::datatrace::CameraEvent*>(_impl_.payload_.camera_event_);
+}
+inline ::datatrace::CameraEvent* PROTOBUF_NONNULL EventWrapper::mutable_camera_event()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::datatrace::CameraEvent* _msg = _internal_mutable_camera_event();
+  // @@protoc_insertion_point(field_mutable:datatrace.EventWrapper.camera_event)
+  return _msg;
+}
+
+// .datatrace.AudioEvent audio_event = 6;
+inline bool EventWrapper::has_audio_event() const {
+  return payload_case() == kAudioEvent;
+}
+inline bool EventWrapper::_internal_has_audio_event() const {
+  return payload_case() == kAudioEvent;
+}
+inline void EventWrapper::set_has_audio_event() {
+  _impl_._oneof_case_[0] = kAudioEvent;
+}
+inline void EventWrapper::clear_audio_event() {
+  ::google::protobuf::internal::TSanWrite(&_impl_);
+  if (payload_case() == kAudioEvent) {
+    if (GetArena() == nullptr) {
+      delete _impl_.payload_.audio_event_;
+    } else if (::google::protobuf::internal::DebugHardenClearOneofMessageOnArena()) {
+      ::google::protobuf::internal::MaybePoisonAfterClear(_impl_.payload_.audio_event_);
+    }
+    clear_has_payload();
+  }
+}
+inline ::datatrace::AudioEvent* PROTOBUF_NULLABLE EventWrapper::release_audio_event() {
+  // @@protoc_insertion_point(field_release:datatrace.EventWrapper.audio_event)
+  if (payload_case() == kAudioEvent) {
+    clear_has_payload();
+    auto* temp = reinterpret_cast<::datatrace::AudioEvent*>(_impl_.payload_.audio_event_);
+    if (GetArena() != nullptr) {
+      temp = ::google::protobuf::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.payload_.audio_event_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::datatrace::AudioEvent& EventWrapper::_internal_audio_event() const {
+  return payload_case() == kAudioEvent ? static_cast<const ::datatrace::AudioEvent&>(*reinterpret_cast<::datatrace::AudioEvent*>(_impl_.payload_.audio_event_))
+                     : reinterpret_cast<const ::datatrace::AudioEvent&>(::datatrace::_AudioEvent_default_instance_);
+}
+inline const ::datatrace::AudioEvent& EventWrapper::audio_event() const ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  // @@protoc_insertion_point(field_get:datatrace.EventWrapper.audio_event)
+  return _internal_audio_event();
+}
+inline ::datatrace::AudioEvent* PROTOBUF_NULLABLE EventWrapper::unsafe_arena_release_audio_event() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:datatrace.EventWrapper.audio_event)
+  if (payload_case() == kAudioEvent) {
+    clear_has_payload();
+    auto* temp = reinterpret_cast<::datatrace::AudioEvent*>(_impl_.payload_.audio_event_);
+    _impl_.payload_.audio_event_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void EventWrapper::unsafe_arena_set_allocated_audio_event(
+    ::datatrace::AudioEvent* PROTOBUF_NULLABLE value) {
+  // We rely on the oneof clear method to free the earlier contents
+  // of this oneof. We can directly use the pointer we're given to
+  // set the new value.
+  clear_payload();
+  if (value) {
+    set_has_audio_event();
+    _impl_.payload_.audio_event_ = reinterpret_cast<::google::protobuf::Message*>(value);
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:datatrace.EventWrapper.audio_event)
+}
+inline ::datatrace::AudioEvent* PROTOBUF_NONNULL EventWrapper::_internal_mutable_audio_event() {
+  if (payload_case() != kAudioEvent) {
+    clear_payload();
+    set_has_audio_event();
+    _impl_.payload_.audio_event_ = reinterpret_cast<::google::protobuf::Message*>(
+        ::google::protobuf::Message::DefaultConstruct<::datatrace::AudioEvent>(GetArena()));
+  }
+  return reinterpret_cast<::datatrace::AudioEvent*>(_impl_.payload_.audio_event_);
+}
+inline ::datatrace::AudioEvent* PROTOBUF_NONNULL EventWrapper::mutable_audio_event()
+    ABSL_ATTRIBUTE_LIFETIME_BOUND {
+  ::datatrace::AudioEvent* _msg = _internal_mutable_audio_event();
+  // @@protoc_insertion_point(field_mutable:datatrace.EventWrapper.audio_event)
   return _msg;
 }
 
